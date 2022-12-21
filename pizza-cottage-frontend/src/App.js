@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import ProductsPage from './pages/ProductsPage';
 import Navigation from './components/Navigation';
+import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route exact path='/' element={<Home/>} />
           <Route exact path='/about' element={<About/>} />
           <Route exact path='/products' element={<ProductsPage />} />
+          <Route exact path='/products/:_id' element={<SingleProduct/>}/>
           <Route exact path='/cart' element={<Cart/>} />
         </Routes>
       </BrowserRouter>
