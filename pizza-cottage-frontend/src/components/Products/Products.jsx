@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Product from '../Product/Product';
+import { CartContext } from '../../CartContext';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,6 +12,8 @@ const Products = () => {
       setProducts(products);
     })
   },[]);
+
+  // const {name} = useContext(CartContext);
 
   return (
     <div className='container mx-auto pb-24'>
