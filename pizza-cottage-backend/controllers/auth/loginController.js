@@ -1,8 +1,11 @@
+require('dotenv').config()
 const Joi = require("joi");
 const User = require("../../models/user");
 const CustomErrorHandler = require("../../services/CustomErrorHandler");
 const bcrypt = require("bcrypt");
 const JwtService = require("../../services/JwtService");
+const RefreshToken = require('../../models/refreshToken');
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 const loginController = {
     async login(req, res, next) {
@@ -31,8 +34,12 @@ const loginController = {
 
             // Token
             const access_token = JwtService.sign({ _id: user._id, role: user.role });
+            const refresh_token = JwtService.sign({ _id: user._id, role: user.role}, '1y', REFRESH_SECRET);
 
-            res.json({access_token});
+            //database whitelist
+            await RefreshToken.create({ token: refresh_token });
+
+            res.json({access_token, refresh_token});
 
         } catch(err) {
             return next(err);
