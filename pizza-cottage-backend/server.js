@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const errorHandler = require('./middlewares/errorHandler');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3333
@@ -20,8 +21,11 @@ db.once('open', () => {
     console.log('DB connected...');
 });
 
+global.appRoot = path.resolve(__dirname);
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api',require('./routes'))
+app.use('/uploads', express.static('uploads'));
 
 app.use(errorHandler);
 
