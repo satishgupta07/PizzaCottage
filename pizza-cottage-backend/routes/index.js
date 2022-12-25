@@ -10,5 +10,6 @@ router.post('/register', registerController.register);
 router.post('/login', loginController.login);
 router.get('/currentloginuser', auth, userController.getCurrentLoginUser);
 router.post('/refresh', refreshController.refresh);
+router.post('/logout', auth, loginController.logout)
 
 module.exports = router;
