@@ -47,7 +47,7 @@ const registerController = {
             const result = await user.save();
 
             //Token
-            access_token = JwtService.sign({ _id: result._id, role: result.role });
+            access_token = JwtService.sign({ _id: reslt._id, role: result.role });
         } catch(err) {
             return next(err);
         }
